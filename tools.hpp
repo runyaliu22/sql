@@ -10,6 +10,7 @@ using namespace pqxx;
 
 
 void addPlayerFromFile(const char *fileName, connection *C){
+
   int player_id, team_id, uniform_num, mpg, ppg, rpg, apg;
   double spg, bpg;
   string line, first_name, last_name;
@@ -20,19 +21,20 @@ void addPlayerFromFile(const char *fileName, connection *C){
 
     while(getline(file,line)){
 
-      stringstream converter;
-      converter<<line;
-      converter>>player_id>>team_id>>uniform_num>>first_name>>last_name>>mpg>>ppg>>rpg>>apg>>spg>>bpg;
+      stringstream ss;
+      ss<<line;
+      ss>>player_id>>team_id>>uniform_num>>first_name>>last_name>>mpg>>ppg>>rpg>>apg>>spg>>bpg;
 
-      add_player(C,team_id,uniform_num,first_name,last_name,mpg,ppg,rpg,apg,spg,bpg);
+      add_player(C, team_id, uniform_num, first_name, last_name, mpg, ppg, rpg, apg, spg, bpg);
     }
 
     file.close();
     return;
+
   }
 
   else{
-    cerr<<"Unable to open the file for player!"<<endl;
+    cerr<<"Unable to open player" <<endl;
     return;
   }
 }
@@ -46,16 +48,17 @@ void addTeamFromFile(const char *fileName, connection *C){
   if(file.is_open()){
     while(getline(file,line)){
 
-      stringstream converter;
-      converter<<line;
-      converter>>team_id>>team_name>>state_id>>color_id>>wins>>losses;
+      stringstream ss;
+      ss<<line;
+      ss>>team_id>>team_name>>state_id>>color_id>>wins>>losses;
+
       add_team(C,team_name,state_id,color_id,wins,losses);
     }
     file.close();
     return;
   }
   else{
-    cerr<<"Unable to open the file for color!"<<endl;
+    cerr<<"Unable to open the team!"<<endl;
     return;
   }
 }
@@ -67,15 +70,18 @@ void addStateFromFile(const char *fileName, connection *C){
 
   if(file.is_open()){
     while(getline(file,line)){
-      stringstream converter;
-      converter<<line;
-      converter>>state_id>>state_name;
+
+      stringstream ss;
+      ss<<line;
+      ss>>state_id>>state_name;
+
       add_state(C,state_name);
     }
     file.close();
     return;
-  }else{
-    cerr<<"Unable to open the file for state!"<<endl;
+  }
+  else{
+    cerr<<"Unable to open state!"<<endl;
     return;
   }
 }
@@ -90,16 +96,17 @@ void addColorFromFile(const char *fileName, connection *C){
 
   if(file.is_open()){
     while(getline(file,line)){
-      stringstream converter;
-      converter<<line;
-      converter>>color_id>>color_name;
+      stringstream ss;
+      ss<<line;
+      ss>>color_id>>color_name;
+
       add_color(C,color_name);
     }
     file.close();
     return;
   }
   else{
-    cerr<<"Unable to open the file for color!"<<endl;
+    cerr<<"Unable to open color!"<<endl;
     return;
   }
 }

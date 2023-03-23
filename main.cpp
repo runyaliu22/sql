@@ -35,7 +35,7 @@ int main (int argc, char *argv[])
   //create tables(4)
   work W(*C);
 
-  W.exec("DROP TABLE IF EXISTS player;");
+  W.exec("DROP TABLE IF EXISTS PLAYER;");
   
   W.exec("CREATE TABLE PLAYER("
     "PLAYER_ID  SERIAL PRIMARY KEY,"
@@ -66,6 +66,7 @@ int main (int argc, char *argv[])
    "WINS INT,"
    "LOSSES INT"
 ");");
+
 
   W.exec("DROP TABLE IF EXISTS STATE;");
   W.exec("CREATE TABLE STATE ("
@@ -99,8 +100,6 @@ int main (int argc, char *argv[])
     addStateFromFile("state.txt", C);
 
     addColorFromFile("color.txt", C);
-
-
 
 
     exercise(C);

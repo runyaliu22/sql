@@ -6,22 +6,30 @@ void add_player(connection *C, int team_id, int jersey_num, string first_name, s
                 int mpg, int ppg, int rpg, int apg, double spg, double bpg)
 {
     work W(*C);
-    stringstream statement;
-    statement<<"INSERT INTO PLAYER (TEAM_ID, UNIFORM_NUM, FIRST_NAME, LAST_NAME, MPG," 
+
+    stringstream query;
+
+    query<<"INSERT INTO PLAYER (TEAM_ID, UNIFORM_NUM, FIRST_NAME, LAST_NAME, MPG," 
         <<"PPG, RPG, APG, SPG, BPG) VALUES ("<<team_id<<", "<<jersey_num<<", "
         <<W.quote(first_name)<<", "<<W.quote(last_name)<<", "<<mpg<<", "<<ppg
         <<", "<<rpg<<", "<<apg<<", "<<spg<<", "<<bpg<<");";
-    W.exec(statement.str());
+
+    W.exec(query.str());
+
     W.commit();
 }
 
 void add_team(connection *C, string name, int state_id, int color_id, int wins, int losses)
 {
     work W(*C);
-    stringstream statement;
-    statement << "INSERT INTO TEAM (NAME, STATE_ID, COLOR_ID, WINS, LOSSES) VALUES ("
+
+    stringstream query;
+
+    query << "INSERT INTO TEAM (NAME, STATE_ID, COLOR_ID, WINS, LOSSES) VALUES ("
         <<W.quote(name)<<", "<<state_id<<", "<<color_id<<", "<<wins<<", "<<losses<<");";
-    W.exec(statement.str());
+
+    W.exec(query.str());
+
     W.commit();
 }
 
@@ -30,9 +38,13 @@ void add_team(connection *C, string name, int state_id, int color_id, int wins, 
 void add_state(connection *C, string name)
 {
     work W(*C);
-    stringstream statement;
-    statement << "INSERT INTO STATE (NAME) VALUES ("<<W.quote(name)<<");";
-    W.exec(statement.str());
+
+    stringstream query;
+
+    query << "INSERT INTO STATE (NAME) VALUES ("<<W.quote(name)<<");";
+
+    W.exec(query.str());
+
     W.commit();
 }
 
@@ -40,9 +52,13 @@ void add_state(connection *C, string name)
 void add_color(connection *C, string name)
 {
     work W(*C);
-    stringstream statement;
-    statement << "INSERT INTO COLOR (NAME) VALUES ("<<W.quote(name)<<");";
-    W.exec(statement.str());
+
+    stringstream query;
+
+    query << "INSERT INTO COLOR (NAME) VALUES ("<<W.quote(name)<<");";
+
+    W.exec(query.str());
+
     W.commit();
 }
 
@@ -78,6 +94,7 @@ void query1(connection *C,
         result R = W.exec(query.str());
 
         cout<<"PLAYER_ID TEAM_ID UNIFORM_NUM FIRST_NAME LAST_NAME MPG PPG RPG APG SPG BPG"<<endl;
+
         for (const auto &row : R) {
             for (const auto &field : row) {
                 std::cout << field.as<string>() << " ";
@@ -129,6 +146,7 @@ void query3(connection *C, string team_name)
         work W(*C);
 
         std::ostringstream query;
+        
         query << "SELECT P.FIRST_NAME, P.LAST_NAME "
                  "FROM PLAYER P "
                  "JOIN TEAM T ON P.TEAM_ID = T.TEAM_ID "
@@ -147,7 +165,8 @@ void query3(connection *C, string team_name)
         }
 
         W.commit();
-    } catch (const std::exception &e) {
+    } 
+    catch (const std::exception &e) {
         std::cerr << e.what() << std::endl;
     }
 }
