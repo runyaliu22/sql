@@ -47,8 +47,8 @@ int main (int argc, char *argv[])
     "PPG        INT NOT NULL,"
     "RPG        INT NOT NULL,"
     "APG        INT NOT NULL,"
-    "SPG        REAL NOT NULL,"
-    "BPG        REAL NOT NULL"
+    "SPG        NUMERIC(2,1) NOT NULL,"
+    "BPG        NUMERIC(2,1) NOT NULL"
     ");");
 
   //W.commit();
@@ -93,13 +93,13 @@ int main (int argc, char *argv[])
 
   //W.exec("INSERT INTO PLAYER VALUES(1, 1, 1,'Jerome', 'Robinson', 34, 19, 4, 3, 1.7, 0.4);");
 
-    addPlayerFromFile("player.txt", C);
+    addPlayer("player.txt", C);
 
-    addTeamFromFile("team.txt", C);
+    addTeam("team.txt", C);
 
-    addStateFromFile("state.txt", C);
+    addState("state.txt", C);
 
-    addColorFromFile("color.txt", C);
+    addColor("color.txt", C);
 
 
     exercise(C);
