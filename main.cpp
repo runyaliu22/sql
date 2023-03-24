@@ -93,13 +93,13 @@ int main (int argc, char *argv[])
 
   //W.exec("INSERT INTO PLAYER VALUES(1, 1, 1,'Jerome', 'Robinson', 34, 19, 4, 3, 1.7, 0.4);");
 
-    addPlayer("player.txt", C);
+    addPlayerTable("player.txt", C);
 
-    addTeam("team.txt", C);
+    addTeamTable("team.txt", C);
 
-    addState("state.txt", C);
+    addStateTable("state.txt", C);
 
-    addColor("color.txt", C);
+    addColorTable("color.txt", C);
 
 
     exercise(C);

@@ -9,7 +9,7 @@ using namespace pqxx;
 #include "query_funcs.h"
 
 
-void addPlayer(const char *fileName, connection *C){
+void addPlayerTable(const char *fileName, connection *C){
 
   int player_id, team_id, uniform_num, mpg, ppg, rpg, apg;
   double spg, bpg;
@@ -39,7 +39,7 @@ void addPlayer(const char *fileName, connection *C){
   }
 }
 
-void addTeam(const char *fileName, connection *C){
+void addTeamTable(const char *fileName, connection *C){
 
   int team_id,state_id,color_id,wins,losses;
   string line, team_name;
@@ -63,7 +63,7 @@ void addTeam(const char *fileName, connection *C){
   }
 }
 
-void addState(const char *fileName, connection *C){
+void addStateTable(const char *fileName, connection *C){
   int state_id;
   string line, state_name;
   ifstream file(fileName);
@@ -88,7 +88,7 @@ void addState(const char *fileName, connection *C){
 
 
 
-void addColor(const char *fileName, connection *C){
+void addColorTable(const char *fileName, connection *C){
     
   int color_id;
   string line, color_name;
